@@ -61,7 +61,7 @@
                 android:text="How many candles?" />
 
             <SeekBar
-                android:id="@+id/seekBar2"
+                android:id="@+id/seekBar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:max="5"
@@ -99,15 +99,16 @@
             android:paddingRight="5dp">
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/blow_out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Blow out" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/goodbye"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:onClick="goodbye"
                 android:text="Goodbye" />
         </LinearLayout>
 
