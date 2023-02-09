@@ -16,7 +16,11 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     @Override
     public void onClick(View v) {
-        cakeModel.set_lit_candles(false);
+        boolean should_draw = !cakeModel.get_lit_candles();
+        cakeModel.set_lit_candles(should_draw);
+        if(should_draw == false) {
+
+        }
         cakeView.invalidate();
     }
 
