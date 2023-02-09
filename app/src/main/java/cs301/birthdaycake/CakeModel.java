@@ -14,4 +14,12 @@ public class CakeModel {
     public boolean get_lit_candles() {
         return lit_candles;
     }
+
+    public void set_has_candles(Boolean b) {
+        has_candles = b;
+    }
+
+    public boolean get_has_candles() {
+        return has_candles;
+    }
 }

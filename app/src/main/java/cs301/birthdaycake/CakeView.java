@@ -37,7 +37,6 @@ public class CakeView extends SurfaceView {
     public static final float innerFlameRadius = 15.0f;
 
 
-
     /**
      * ctor must be overridden here as per standard Java inheritance practice.  We need it
      * anyway to initialize the member variables
@@ -65,7 +64,6 @@ public class CakeView extends SurfaceView {
         wickPaint.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
-
     }
 
     /**
@@ -73,6 +71,11 @@ public class CakeView extends SurfaceView {
      * the position of the bottom left corner of the candle
      */
     public void drawCandle(Canvas canvas, float left, float bottom) {
+        boolean draw_candles = cakeModel.get_has_candles();
+        if(draw_candles == false) {
+            return;
+        }
+
         //draw the foundation
         canvas.drawRect(left, bottom - candleHeight, left + candleWidth, bottom, candlePaint);
 
@@ -81,8 +84,9 @@ public class CakeView extends SurfaceView {
         float wickTop = bottom - wickHeight - candleHeight;
         canvas.drawRect(wickLeft, wickTop, wickLeft + wickWidth, wickTop + wickHeight, wickPaint);
 
-        boolean draw_or_not = cakeModel.get_lit_candles();
-        if(draw_or_not == false) {
+        //draw the flames or not
+        boolean draw_flames = cakeModel.get_lit_candles();
+        if(draw_flames == false) {
             return;
         }
 
@@ -104,8 +108,7 @@ public class CakeView extends SurfaceView {
      * This method will draw a birthday cake
      */
     @Override
-    public void onDraw(Canvas canvas)
-    {
+    public void onDraw(Canvas canvas) {
         //top and bottom are used to keep a running tally as we progress down the cake layers
         float top = cakeTop;
         float bottom = cakeTop + frostHeight;
@@ -131,12 +134,9 @@ public class CakeView extends SurfaceView {
         //Now a candle in the center
         drawCandle(canvas, cakeLeft + cakeWidth/3 - candleWidth/2, cakeTop);
         drawCandle(canvas, cakeLeft + 2 * cakeWidth/3 - candleWidth/2, cakeTop);
-
     }//onDraw
 
     public CakeModel getCakeModel() {
         return cakeModel;
     }
-
 }//class CakeView
-
