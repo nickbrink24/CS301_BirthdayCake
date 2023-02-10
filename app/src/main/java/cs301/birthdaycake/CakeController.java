@@ -1,6 +1,7 @@
 package cs301.birthdaycake;
 
 import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.SeekBar;
 
@@ -18,8 +19,13 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
     public void onClick(View v) {
         boolean should_draw = !cakeModel.get_lit_candles();
         cakeModel.set_lit_candles(should_draw);
-        if(should_draw == false) {
 
+        View newView = v;
+        Button lit_action = newView.findViewById(R.id.blow_out);
+        if(should_draw == false) {
+            lit_action.setText("Re-Light");
+        } else {
+            lit_action.setText("Blow Out");
         }
         cakeView.invalidate();
     }
