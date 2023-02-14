@@ -6,6 +6,8 @@ public class CakeModel {
     private int num_candles = 2;
     private boolean has_frosting = true;
     private boolean has_candles = true;
+    private float touchX;
+    private float touchY;
 
     public void set_lit_candles(Boolean b) {
         lit_candles = b;
@@ -29,5 +31,26 @@ public class CakeModel {
 
     public int get_num_candles() {
         return num_candles;
+    }
+
+    public void setTouchX(float x) {
+        touchX = x;
+    }
+
+    public float getTouchX() {
+        return touchX;
+    }
+
+    public void setTouchY(float y) {
+        touchY = y;
+    }
+
+    public float getTouchY() {
+        return touchY;
+    }
+
+    public String toString() {
+        String rtn = "X: " + getTouchX() + ", Y: " + getTouchY();
+        return rtn;
     }
 }

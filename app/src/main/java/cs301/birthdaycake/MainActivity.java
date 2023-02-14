@@ -6,10 +6,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Switch;
 
 public class MainActivity extends AppCompatActivity {
+
+    private LinearLayout myLayout = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
         SeekBar num_candles = findViewById(R.id.seekBar);
         num_candles.setOnSeekBarChangeListener(cakeController);
+
+        myLayout = findViewById(R.id.LinearLayout);
+        myLayout.setOnTouchListener(cakeController);
     }
 
     public void goodbye(View button) {
