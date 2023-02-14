@@ -50,7 +50,7 @@ public class CakeModel {
     }
 
     public String toString() {
-        String rtn = "X: " + getTouchX() + ", Y: " + getTouchY();
-        return rtn;
+        String ret = "X: " + getTouchX() + ", Y: " + getTouchY();
+        return ret;
     }
 }

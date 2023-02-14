@@ -74,8 +74,8 @@ public class CakeView extends SurfaceView {
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
         coordinatePaint.setColor(Color.RED);
-        coordinatePaint.setTextSize(75);
         coordinatePaint.setStyle(Paint.Style.FILL);
+        coordinatePaint.setTextSize(75);
         balloonPaint.setColor(Color.BLUE);
         balloonPaint.setStyle(Paint.Style.FILL);
         balloonStringPaint.setColor(Color.BLACK);
@@ -94,7 +94,7 @@ public class CakeView extends SurfaceView {
      */
     public void drawCandle(Canvas canvas, float left, float bottom) {
         boolean draw_candles = cakeModel.get_has_candles();
-        if(draw_candles == false) {
+        if(!draw_candles) {
             return;
         }
 
@@ -108,7 +108,7 @@ public class CakeView extends SurfaceView {
 
         //draw the flames or not
         boolean draw_flames = cakeModel.get_lit_candles();
-        if(draw_flames == false) {
+        if(!draw_flames) {
             return;
         }
 
