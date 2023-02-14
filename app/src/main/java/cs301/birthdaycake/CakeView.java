@@ -12,6 +12,10 @@ public class CakeView extends SurfaceView {
     private CakeModel cakeModel;
     private final float DISPLAY_COORDS_X = 1350.0f;
     private final float DISPLAY_COORDS_Y = 760.0f;
+    private final float BALLOON_STRING_LENGTH = 175.0f;
+    private final float BALLOON_HORIZ_ADJUST = 50.0f;
+    private final float BALLOON_VERT_ADJUST = 75.0f;
+    private final float RECTANGLE_LENGTH = 25.0f;
 
     /* These are the paints we'll use to draw the birthday cake below */
     Paint cakePaint = new Paint();
@@ -21,6 +25,10 @@ public class CakeView extends SurfaceView {
     Paint innerFlamePaint = new Paint();
     Paint wickPaint = new Paint();
     Paint coordinatePaint = new Paint();
+    Paint balloonPaint = new Paint();
+    Paint balloonStringPaint = new Paint();
+    Paint bigRectangle = new Paint();
+    Paint smallRectangle = new Paint();
 
     /* These constants define the dimensions of the cake.  While defining constants for things
         like this is good practice, we could be calculating these better by detecting
@@ -66,7 +74,16 @@ public class CakeView extends SurfaceView {
         wickPaint.setColor(Color.BLACK);
         wickPaint.setStyle(Paint.Style.FILL);
         coordinatePaint.setColor(Color.RED);
+        coordinatePaint.setTextSize(75);
         coordinatePaint.setStyle(Paint.Style.FILL);
+        balloonPaint.setColor(Color.BLUE);
+        balloonPaint.setStyle(Paint.Style.FILL);
+        balloonStringPaint.setColor(Color.BLACK);
+        balloonStringPaint.setStyle(Paint.Style.FILL);
+        bigRectangle.setColor(Color.RED);
+        bigRectangle.setStyle(Paint.Style.FILL);
+        smallRectangle.setColor(Color.GREEN);
+        smallRectangle.setStyle(Paint.Style.FILL);
 
         setBackgroundColor(Color.WHITE);  //better than black default
     }
@@ -142,11 +159,36 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + i * cakeWidth/(num_candles + 1) - candleWidth/2, cakeTop);
         }
 
-        coordinatePaint.setTextSize(75);
-        canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
+        drawPatterns(canvas);
     }//onDraw
 
     public CakeModel getCakeModel() {
         return cakeModel;
+    }
+
+    public void drawPatterns(Canvas canvas) {
+        //draw the coords
+        if(cakeModel.getTouchX() == -5000 && cakeModel.getTouchY() == -5000) {
+            canvas.drawText("X: 0.0, Y: 0.0", DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
+        } else {
+            canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
+        }
+
+        //draw the balloon
+        canvas.drawLine(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX(),
+                cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
+        canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
+                cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
+                balloonPaint);
+
+        //draw the balloon rectangle pattern
+        canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
+                cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
+                bigRectangle);
+        canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
+                cakeModel.getTouchX(), cakeModel.getTouchY(), smallRectangle);
+        canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(),
+                cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
+                smallRectangle);
     }
 }//class CakeView

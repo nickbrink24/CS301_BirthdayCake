@@ -1,5 +1,6 @@
 package cs301.birthdaycake;
 
+import android.graphics.Canvas;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -10,10 +11,12 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     private CakeView cakeView;
     private CakeModel cakeModel;
+    private Canvas draw;
 
     public CakeController(CakeView view) {
         cakeView = view;
         cakeModel = view.getCakeModel();
+        draw = new Canvas();
     }
 
     @Override
@@ -53,7 +56,7 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
 
     @Override
     public boolean onTouch(View v, MotionEvent e) {
-        boolean rtn = true;
+        boolean rtrn = true;
 
         if(e.getAction() == MotionEvent.ACTION_DOWN) {
             cakeModel.setTouchX(e.getX());
@@ -61,6 +64,6 @@ public class CakeController implements View.OnClickListener, CompoundButton.OnCh
             cakeView.invalidate();
         }
 
-        return rtn;
+        return rtrn;
     }
 }
