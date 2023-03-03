@@ -13,6 +13,7 @@ public class CakeView extends SurfaceView {
     private final float DISPLAY_COORDS_X = 1350.0f;
     private final float DISPLAY_COORDS_Y = 760.0f;
     private final float BALLOON_STRING_LENGTH = 175.0f;
+    private final float BALLOON_STRING_WIDTH = 5f;
     private final float BALLOON_HORIZ_ADJUST = 50.0f;
     private final float BALLOON_VERT_ADJUST = 75.0f;
     private final float RECTANGLE_LENGTH = 25.0f;
@@ -159,7 +160,9 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + i * cakeWidth/(num_candles + 1) - candleWidth/2, cakeTop);
         }
 
-        drawPatterns(canvas);
+        if (cakeModel.getTouchX() > 0) {
+            drawPatterns(canvas);
+        }
     }//onDraw
 
     public CakeModel getCakeModel() {
@@ -174,14 +177,16 @@ public class CakeView extends SurfaceView {
             canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
         }
 
-        //draw the balloon
-        canvas.drawLine(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX(),
+        drawBalloon(canvas);
+    }
+
+    private void drawBalloon(Canvas canvas) {
+        canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX()+BALLOON_STRING_WIDTH,
                 cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
         canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
                 cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
                 balloonPaint);
 
-        //draw the balloon rectangle pattern
         canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
                 cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
                 bigRectangle);
