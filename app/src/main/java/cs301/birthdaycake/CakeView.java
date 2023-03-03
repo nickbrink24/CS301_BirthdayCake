@@ -160,9 +160,7 @@ public class CakeView extends SurfaceView {
             drawCandle(canvas, cakeLeft + i * cakeWidth/(num_candles + 1) - candleWidth/2, cakeTop);
         }
 
-        if (cakeModel.getTouchX() > 0) {
-            drawPatterns(canvas);
-        }
+        drawPatterns(canvas);
     }//onDraw
 
     public CakeModel getCakeModel() {
@@ -171,22 +169,23 @@ public class CakeView extends SurfaceView {
 
     public void drawPatterns(Canvas canvas) {
         //draw the coords
-        if(cakeModel.getTouchX() == -5000 && cakeModel.getTouchY() == -5000) {
+        if(cakeModel.getTouchX() == -1 && cakeModel.getTouchY() == -1) {
             canvas.drawText("X: 0.0, Y: 0.0", DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
         } else {
             canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
+            drawBalloon(canvas);
         }
-
-        drawBalloon(canvas);
     }
 
     private void drawBalloon(Canvas canvas) {
+        // balloon string and balloon
         canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX()+BALLOON_STRING_WIDTH,
                 cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
         canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
                 cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
                 balloonPaint);
 
+        // tile pattern
         canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
                 cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
                 bigRectangle);
