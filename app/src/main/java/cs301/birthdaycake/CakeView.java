@@ -180,7 +180,7 @@ public class CakeView extends SurfaceView {
 
     private void drawBalloon(Canvas canvas) {
         // balloon string and balloon
-        canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX()+BALLOON_STRING_WIDTH,
+        canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX() + BALLOON_STRING_WIDTH,
                 cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
         canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
                 cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
