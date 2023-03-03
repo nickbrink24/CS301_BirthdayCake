@@ -6,8 +6,8 @@ public class CakeModel {
     private int num_candles = 2;
     private boolean has_frosting = true;
     private boolean has_candles = true;
-    private float touchX = -5000;
-    private float touchY = -5000;
+    private float touchX = -1;
+    private float touchY = -1;
 
     public void set_lit_candles(Boolean b) {
         lit_candles = b;

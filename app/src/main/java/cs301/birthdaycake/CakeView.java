@@ -168,27 +168,26 @@ public class CakeView extends SurfaceView {
 
     public void drawPatterns(Canvas canvas) {
         //draw the coords
-        if(cakeModel.getTouchX() == -5000 && cakeModel.getTouchY() == -5000) {
+        if(cakeModel.getTouchX() == -1 && cakeModel.getTouchY() == -1) {
             canvas.drawText("X: 0.0, Y: 0.0", DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
         } else {
             canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
+            //draw the balloon
+            canvas.drawLine(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX(),
+                    cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
+            canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
+                    cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
+                    balloonPaint);
+
+            //draw the balloon rectangle pattern
+            canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
+                    cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
+                    bigRectangle);
+            canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
+                    cakeModel.getTouchX(), cakeModel.getTouchY(), smallRectangle);
+            canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(),
+                    cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
+                    smallRectangle);
         }
-
-        //draw the balloon
-        canvas.drawLine(cakeModel.getTouchX(), cakeModel.getTouchY(), cakeModel.getTouchX(),
-                cakeModel.getTouchY() + BALLOON_STRING_LENGTH, balloonStringPaint);
-        canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
-                cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
-                balloonPaint);
-
-        //draw the balloon rectangle pattern
-        canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
-                cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
-                bigRectangle);
-        canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
-                cakeModel.getTouchX(), cakeModel.getTouchY(), smallRectangle);
-        canvas.drawRect(cakeModel.getTouchX(), cakeModel.getTouchY(),
-                cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
-                smallRectangle);
     }
 }//class CakeView
