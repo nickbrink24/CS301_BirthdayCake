@@ -174,6 +174,7 @@ public class CakeView extends SurfaceView {
         } else {
             canvas.drawText(cakeModel.toString(), DISPLAY_COORDS_X, DISPLAY_COORDS_Y, coordinatePaint);
             drawBalloon(canvas);
+            drawTile(canvas);
         }
     }
 
@@ -184,7 +185,9 @@ public class CakeView extends SurfaceView {
         canvas.drawOval(cakeModel.getTouchX() - BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() - BALLOON_VERT_ADJUST,
                 cakeModel.getTouchX() + BALLOON_HORIZ_ADJUST, cakeModel.getTouchY() + BALLOON_VERT_ADJUST,
                 balloonPaint);
+    }
 
+    private void drawTile(Canvas canvas) {
         // tile pattern
         canvas.drawRect(cakeModel.getTouchX() - RECTANGLE_LENGTH, cakeModel.getTouchY() - RECTANGLE_LENGTH,
                 cakeModel.getTouchX() + RECTANGLE_LENGTH, cakeModel.getTouchY() + RECTANGLE_LENGTH,
